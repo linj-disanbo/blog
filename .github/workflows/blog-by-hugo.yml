@@ -1,0 +1,59 @@
+name: blog-by-hugo
+on: [push]
+
+jobs:
+        build:
+                name: Build
+                runs-on: ubuntu-latest
+                steps:
+                        # 使用预编译的 Hugo 二进制文件
+                        - name: Setup Hugo
+                          uses: peaceiris/actions-hugo@v2.2.2
+                          with:
+                                  hugo-version: "latest"
+                                  # 使用 Hugo-extended 版本
+                                  extended: true
+                        - name: New site
+                          run: |
+                                  hugo new site $HOME/blog
+                        - name: get theme
+                          run: |
+                                  git clone --depth=1 https://github.com/vaga/hugo-theme-m10c.git $HOME/blog/themes/m10c
+                        - name: get linj-disanbo.github.io
+                          run: |
+                                  git clone --no-checkout https://github.com/linj-disanbo/linj-disanbo.github.io.git $HOME/blog/public
+                        # 获取内容文件
+                        - uses: actions/checkout@v1
+                          with:
+                          fetch-depth: 1
+                        # 将内容文件复制进入站点内
+                        - name: copy in
+                          run: |
+                                   rm -rf $HOME/blog/config.toml $HOME/blog/content/
+                                   /bin/cp -rf config.toml $HOME/blog/config.toml
+                                   /bin/cp -rf content/ $HOME/blog/content/
+                                   /bin/cp -rf theme-update/me.jpg $HOME/blog/themes/m10c/static/
+                                   /bin/cp -rf theme-update/single.html $HOME/blog/themes/m10c/layouts/_default/single.html
+                        # build
+                        - name: build
+                          run: |
+                                   cd $HOME/blog
+                                   HUGO_ENV=production hugo --gc --minify
+                        # 站点更新
+                        - name: publish
+                          env:
+                                USER: linj-disanbo
+                                EMAIL: linjing_disanbo@163.com
+                                GH_REF: github.com/linj-disanbo/linj-disanbo.github.io.git
+                                # 这里的 token 需要自己在 GitHub settings 中部署，并利用 actions 的 secrets 功能
+                                GH_TOKEN: ${{ secrets.BLOG_UPDATE }} 
+                          run:
+                                  cd $HOME/blog/public
+                                  git config --global user.name $USER
+                                  git config --global user.email $EMAIL
+                                  git add .
+                                  git commit -m "Auto Update: `date +'%Y-%m-%d %H:%M:%S'`"
+                                  git push "https://$USER:$GH_TOKEN@$GH_REF" master:master
+
+
+
