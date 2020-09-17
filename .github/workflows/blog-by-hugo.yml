@@ -25,7 +25,7 @@ jobs:
                         # 获取内容文件
                         - uses: actions/checkout@v1
                           with:
-                          fetch-depth: 1
+                                  fetch-depth: 1
                         # 将内容文件复制进入站点内
                         - name: copy in
                           run: |
