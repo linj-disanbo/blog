@@ -47,7 +47,7 @@ jobs:
                                 GH_REF: github.com/linj-disanbo/linj-disanbo.github.io.git
                                 # 这里的 token 需要自己在 GitHub settings 中部署，并利用 actions 的 secrets 功能
                                 GH_TOKEN: ${{ secrets.BLOG_UPDATE }} 
-                          run:
+                          run: |
                                   cd $HOME/blog/public
                                   git config --global user.name $USER
                                   git config --global user.email $EMAIL
