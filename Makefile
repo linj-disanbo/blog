@@ -4,7 +4,7 @@ dep:
 	rm -rf blog
 	hugo new site blog
 	git clone --depth=1 https://github.com/vaga/hugo-theme-m10c.git blog/themes/m10c
-	git clone --depth=1 https://github.com/linj-disanbo/linj-disanbo.github.io.git blog/public
+	git clone --depth=1 git@github.com:linj-disanbo/linj-disanbo.github.io.git blog/public
 
 
 build:
