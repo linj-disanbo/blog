@@ -2,14 +2,14 @@
 title: "用hugo + github.io 搭建个人博客"
 date: 2020-09-17T11:33:36+08:00
 tags: ["hugo", "blog", "github.io"] 
-draft: true
+draft: false
 notoc: false
 ---
 
 
 # 用hugo + github.io 搭建个人博客
 
-## 安装
+## 安装hugo
 
 ```
 $ sudo aptitude install hugo
@@ -45,7 +45,7 @@ archetypes  config.toml  content  data  layouts  static  themes
 
 ```
 
-## 主题
+## 主题选择
 
 ```
 https://themes.gohugo.io/
@@ -88,7 +88,7 @@ draft: true
 # 用hugo + github.io 搭建个人博客
 
 
-## 安装
+## 安装hugo
 
 
 ```
@@ -100,7 +100,7 @@ $ hugo server -t m10c --buildDrafts
 
 ``` 
 
-用浏览器打开看效果
+用浏览器打开看效果, 地址为 http://localhost:1313/ 
 
 ## 和github.io 进行关联
 
@@ -119,7 +119,9 @@ $ git commit
 $ git push 
 ```
 
-## 后续
+用浏览器打开看效果, 地址为 https://linj-disanbo.github.io/
+
+## 后续完善
 
 ### 目录结构
 
@@ -178,6 +180,24 @@ theme = "m10c"
 ```
 
  1. me.jpg 需要放到 themes/m10c/static/ 目录 (可能不同的主题位置不一样)
+
+### 添加文章目录
+
+```
+# themes/m10c/layouts/_default/single.html
+    <div id="toc" class="well col-md-4 col-sm-6">
+      {{ .TableOfContents }}
+    </div>
+```
+
+问题: 本来想添加在右边的, 但窗口适配没弄好. 现在加在标题下放.
+
+
+### 将原始的博客文本管理起来
+
+ 1. 可以建立另外一个github repo, 如 https://github.com/linj-disanbo/docs
+ 1. 将原始的博客文本加入到repo中
+ 1. 进一步可以添加一些实用的脚本, 如生成站点文件, 上传等
  
 ## 可能遇到问题
 
