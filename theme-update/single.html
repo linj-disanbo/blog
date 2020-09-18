@@ -1,9 +1,4 @@
 {{ define "main" }}
-    {{ if not .Params.notoc }}
-    <div id="toc" class="well col-md-4 col-sm-6">
-      {{ .TableOfContents }}
-    </div>
-    {{ end }}
   <article class="post">
     <div>
     <header class="post-header">
@@ -29,6 +24,11 @@
         {{- end -}}
       </div>
     </header>
+    {{ if not .Params.notoc }}
+    <div id="toc" class="well col-md-4 col-sm-6">
+      {{ .TableOfContents }}
+    </div>
+    {{ end }}
     <div class="post-content">
       {{ .Content }}
     </div>
