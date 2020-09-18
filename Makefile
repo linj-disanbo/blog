@@ -25,6 +25,7 @@ upload:
 	git push
 
 	
-
+local_run:
+	cd blog/ && hugo server -t m10c --buildDrafts && cd ..
 
 
