@@ -1,6 +1,7 @@
 name: blog-by-hugo
 on: [push]
-
+        branches:
+                - auto
 jobs:
         build:
                 name: Build
