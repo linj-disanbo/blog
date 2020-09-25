@@ -198,6 +198,10 @@ theme = "m10c"
  1. 可以建立另外一个github repo, 如 https://github.com/linj-disanbo/docs
  1. 将原始的博客文本加入到repo中
  1. 进一步可以添加一些实用的脚本, 如生成站点文件, 上传等
+
+### 劝退
+
+ 1. 直接用markdown 在issue里写博客, 更方便
  
 ## 可能遇到问题
 
